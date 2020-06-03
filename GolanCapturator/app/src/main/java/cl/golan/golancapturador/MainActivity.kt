@@ -15,30 +15,17 @@ class MainActivity : AppCompatActivity() {
         inicializarComponentes()
 
         /**
-         * Eventos al tocar el botón checkCantidadUnitaria.
-         */
-        checkCantidadUnitaria.setOnClickListener {
-            if (checkCantidadUnitaria.isChecked) {
-                txtCantidad.setText("1")
-                txtCodigoBarra.requestFocus()
-            } else {
-                txtCantidad.setText("")
-                txtCantidad.requestFocus()
-            }
-        }
-
-        /**
-         * Eventos al tocar el botón checkCantidadUnitaria.
+         * Evento al tocar el botón Agregar.
          */
         btnAgregar.setOnClickListener {
             txtCodigoBarra.requestFocus()
         }
 
         /**
-         * Eventos al tocar el botón checkCantidadUnitaria.
+         * Evento al tocar el botón Traspasar Datos.
          */
         btnTraspasarDatos.setOnClickListener {
-            // Crear hilo que contenga la lógica para que no se pega la app
+            // Crear hilo que contenga la lógica, así  no se pega la app
             txtCodigoBarra.requestFocus()
         }
     }
@@ -49,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     private fun inicializarComponentes() {
         txtCantidad.setText("1")
         txtCodigoBarra.setGravity(Gravity.CENTER)
-        checkCantidadUnitaria.setChecked(true)
         txtCodigoBarra.requestFocus()
     }
 

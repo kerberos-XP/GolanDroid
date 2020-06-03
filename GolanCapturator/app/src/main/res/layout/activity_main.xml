@@ -11,24 +11,14 @@
         android:layout_width="268dp"
         android:layout_height="42dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Ingrese Código de Barras"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkCantidadUnitaria" />
-
-    <Button
-        android:id="@+id/btnAgregar"
-        android:layout_width="267dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="20dp"
-        android:text="Agregar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCodigoBarra" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCantidad" />
 
     <Button
         android:id="@+id/btnTraspasarDatos"
@@ -37,30 +27,41 @@
         android:layout_marginTop="20dp"
         android:text="Traspasar Datos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAgregar" />
 
-    <CheckBox
-        android:id="@+id/checkCantidadUnitaria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="44dp"
-        android:text="Cantidad Unitaria"
+    <Button
+        android:id="@+id/btnAgregar"
+        android:layout_width="267dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
+        android:text="Agregar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCodigoBarra" />
 
     <EditText
         android:id="@+id/txtCantidad"
-        android:layout_width="69dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="147dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/checkCantidadUnitaria"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.731"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblCantidad"
+        android:layout_width="111dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:text="Cantidad:"
+        app:layout_constraintEnd_toStartOf="@+id/txtCantidad"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
