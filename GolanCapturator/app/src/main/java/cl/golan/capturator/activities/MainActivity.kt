@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
                 alerta.setTitle("Aviso")
                 alerta.setMessage("Ingrese una cantidad mayor que 0 y menor que 1000000.")
                 alerta.show()
+
+                txtCodigoBarra.requestFocus()
+
                 return@setOnClickListener
             }
 
@@ -45,24 +48,39 @@ class MainActivity : AppCompatActivity() {
                 alerta.setTitle("Aviso")
                 alerta.setMessage("Ingrese un código de barras de a lo menos 6 dígitos.")
                 alerta.show()
+
+                txtCodigoBarra.requestFocus()
+
                 return@setOnClickListener
             }
 
-            val cb = CodigoBarras(codigoBarra, cantidad)
-            datos.add(cb)
+            // Crear objeto CodigoBarras a partir del código y cantidad ingresado
+            val codigo = CodigoBarras(codigoBarra, cantidad)
 
-            val adaptador = ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
+            // Si ya está agregado sumarlo, de lo contrario se agrega a la lista
+            if (datos.contains(codigo)) {
+                for (cb in datos) {
+                    if (codigo.equals(cb)) {
+                        cb.cantidad = (cb.cantidad.toInt() + codigo.cantidad.toInt()).toString()
+                    }
+                }
+            } else {
+                datos.add(codigo)
+            }
+
+            val adaptador =
+                ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
             lista.adapter = adaptador
-
-            txtCantidad.setText("1")
-            txtCodigoBarra.setText("")
-            txtCodigoBarra.requestFocus()
 
             Toast.makeText(
                 this,
                 "Se agregó: " + codigoBarra + " x " + txtCantidad.text.toString(),
                 Toast.LENGTH_SHORT
             ).show()
+
+            txtCantidad.setText("1")
+            txtCodigoBarra.setText("")
+            txtCodigoBarra.requestFocus()
         }
 
         /**
@@ -71,8 +89,6 @@ class MainActivity : AppCompatActivity() {
         btnEnviarDatos.setOnClickListener {
             // Crear hilo que contenga la lógica, así  no se pega la app
 
-            txtCodigoBarra.setText("")
-            txtCantidad.setText("1")
             txtCodigoBarra.requestFocus()
 
             var alerta = AlertDialog.Builder(this)
@@ -80,6 +96,21 @@ class MainActivity : AppCompatActivity() {
             alerta.setTitle("Aviso")
             alerta.setMessage("Conecte el dispositivo al PC.")
             alerta.show()
+        }
+
+        /**
+         * Evento al tocar el botón Limpiar.
+         */
+        btnLimpiar.setOnClickListener {
+
+            datos.clear()
+            val adaptador =
+                ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
+            lista.adapter = adaptador
+
+            txtCodigoBarra.setText("")
+            txtCantidad.setText("1")
+            txtCodigoBarra.requestFocus()
         }
     }
 
