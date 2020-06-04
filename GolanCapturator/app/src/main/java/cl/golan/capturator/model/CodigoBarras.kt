@@ -1,6 +1,7 @@
 package cl.golan.capturator.model
 
 class CodigoBarras(codigo: String, cantidad: String) {
+
     var codigo: String = ""
     var cantidad: String = ""
 
@@ -8,4 +9,9 @@ class CodigoBarras(codigo: String, cantidad: String) {
         this.codigo = codigo
         this.cantidad = cantidad
     }
+
+    override fun toString(): String {
+        return "$codigo x $cantidad"
+    }
+
 }

@@ -7,11 +7,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import cl.golan.activities.R
+import cl.golan.capturator.model.CodigoBarras
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val datos = ArrayList<String>()
+    val datos = ArrayList<CodigoBarras>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -24,8 +25,11 @@ class MainActivity : AppCompatActivity() {
          */
         btnAgregar.setOnClickListener {
 
+            var codigoBarra = txtCodigoBarra.text.toString()
+            var cantidad = txtCantidad.text.toString()
+
             // Validar ingreso de cantidad
-            if (txtCantidad.text.toString().isEmpty() || txtCantidad.text.toString().equals("0")) {
+            if (cantidad.isEmpty() || cantidad.equals("0")) {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
                 alerta.setTitle("Aviso")
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Validar ingreso de código de barra
-            if (txtCodigoBarra.text.isEmpty() || txtCodigoBarra.text.toString().length < 6) {
+            if (codigoBarra.isEmpty() || codigoBarra.length < 6) {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
                 alerta.setTitle("Aviso")
@@ -44,12 +48,13 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            var codigoBarra = txtCodigoBarra.text.toString()
-            datos.add(codigoBarra)
+            val cb = CodigoBarras(codigoBarra, cantidad)
+            datos.add(cb)
 
-            val adaptador = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datos)
+            val adaptador = ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
             lista.adapter = adaptador
 
+            txtCantidad.setText("1")
             txtCodigoBarra.setText("")
             txtCodigoBarra.requestFocus()
 
