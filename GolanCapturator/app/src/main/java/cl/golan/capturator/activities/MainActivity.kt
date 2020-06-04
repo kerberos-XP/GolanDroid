@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
                 alerta.setTitle("Aviso")
-                alerta.setMessage("Ingrese un código de barra de a lo menos 6 dígitos.")
+                alerta.setMessage("Ingrese un código de barras de a lo menos 6 dígitos.")
                 alerta.show()
                 return@setOnClickListener
             }
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * Evento al tocar el botón Traspasar Datos.
          */
-        btnTraspasarDatos.setOnClickListener {
+        btnEnviarDatos.setOnClickListener {
             // Crear hilo que contenga la lógica, así  no se pega la app
 
             txtCodigoBarra.setText("")
