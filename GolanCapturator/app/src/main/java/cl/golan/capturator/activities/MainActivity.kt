@@ -3,6 +3,7 @@ package cl.golan.capturator.activities
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Gravity
+import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             if (cantidad.isEmpty() || cantidad.equals("0")) {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
+                alerta.setIcon(android.R.drawable.ic_dialog_alert)
                 alerta.setTitle("Aviso")
                 alerta.setMessage("Ingrese una cantidad mayor que 0 y menor que 1000000.")
                 alerta.show()
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             if (codigoBarra.isEmpty() || codigoBarra.length < 6) {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
+                alerta.setIcon(android.R.drawable.ic_dialog_alert)
                 alerta.setTitle("Aviso")
                 alerta.setMessage("Ingrese un código de barras de a lo menos 6 dígitos.")
                 alerta.show()
@@ -104,14 +107,22 @@ class MainActivity : AppCompatActivity() {
         btnLimpiar.setOnClickListener {
 
             datos.clear()
-            val adaptador =
-                ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
+            val adaptador = ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
             lista.adapter = adaptador
 
             txtCodigoBarra.setText("")
             txtCantidad.setText("1")
             txtCodigoBarra.requestFocus()
         }
+        
+        lista.setOnItemLongClickListener(OnItemLongClickListener { arg0, arg1, pos, id ->
+            Toast.makeText(
+                this,
+                "SAPBE!!",
+                Toast.LENGTH_SHORT
+            ).show()
+            true
+        })
     }
 
     /**
@@ -124,3 +135,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+
