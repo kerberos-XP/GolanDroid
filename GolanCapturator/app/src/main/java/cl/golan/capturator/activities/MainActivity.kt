@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val datos = ArrayList<CodigoBarras>()
+    var datos = ArrayList<CodigoBarras>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
                 alerta.setIcon(android.R.drawable.ic_dialog_alert)
-                alerta.setTitle("Aviso")
+                alerta.setTitle("Error")
                 alerta.setMessage("Ingrese una cantidad mayor que 0 y menor que 1000000.")
                 alerta.show()
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 var alerta = AlertDialog.Builder(this)
                 alerta.setCancelable(true)
                 alerta.setIcon(android.R.drawable.ic_dialog_alert)
-                alerta.setTitle("Aviso")
+                alerta.setTitle("Error")
                 alerta.setMessage("Ingrese un código de barras de a lo menos 6 dígitos.")
                 alerta.show()
 
@@ -71,8 +71,7 @@ class MainActivity : AppCompatActivity() {
                 datos.add(codigo)
             }
 
-            val adaptador =
-                ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
+            val adaptador = ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
             lista.adapter = adaptador
 
             Toast.makeText(
@@ -96,6 +95,7 @@ class MainActivity : AppCompatActivity() {
 
             var alerta = AlertDialog.Builder(this)
             alerta.setCancelable(true)
+            alerta.setIcon(android.R.drawable.ic_dialog_info)
             alerta.setTitle("Aviso")
             alerta.setMessage("Conecte el dispositivo al PC.")
             alerta.show()
@@ -114,13 +114,37 @@ class MainActivity : AppCompatActivity() {
             txtCantidad.setText("1")
             txtCodigoBarra.requestFocus()
         }
-        
-        lista.setOnItemLongClickListener(OnItemLongClickListener { arg0, arg1, pos, id ->
-            Toast.makeText(
-                this,
-                "SAPBE!!",
-                Toast.LENGTH_SHORT
-            ).show()
+
+        /**
+         * Evento al mantener presionado un item de la lista.
+         */
+        lista.setOnItemLongClickListener(OnItemLongClickListener { arg0, arg1, posicion, id ->
+
+            var alerta = AlertDialog.Builder(this)
+            alerta.setCancelable(true)
+            alerta.setTitle("Confirmación")
+            alerta.setIcon(android.R.drawable.ic_delete)
+            alerta.setMessage("¿Estás seguro qué deseas eliminar este código de barra?")
+            alerta.setPositiveButton("Si") { dialog, which ->
+                datos.removeAt(posicion)
+                val adaptador = ArrayAdapter<CodigoBarras>(this, android.R.layout.simple_list_item_1, datos)
+                lista.adapter = adaptador
+
+                Toast.makeText(
+                    applicationContext,
+                    "Código eliminado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            alerta.setNegativeButton("No") { dialog, which ->
+                Toast.makeText(
+                    applicationContext,
+                    "Cancelaste la operación",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            alerta.show()
+
             true
         })
     }
